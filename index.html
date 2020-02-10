@@ -1,0 +1,381 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Mukta&display=swap" rel="stylesheet"> <!-- Google Fonts - Mukta, By Ek Type-->
+    <link rel="icon" href="/educheck.ico">
+    <title>EduCheck</title>
+    <style> /* CSS */
+        #config {
+            width: 65px;
+            position: absolute;
+            bottom: 5px;
+            right: 3px;
+            z-index: 3;
+        }
+        #confighoverimg {
+            width: 200px;
+            display: none;
+        }
+        #user {
+            width: 55px;
+            position: absolute;
+            top: 10px;
+            right: 3px;
+            z-index: 3;
+        }
+        #usermsg {
+            width: 200px;
+            display: none;
+            position: absolute;
+            top: 20px;
+            right: 64px;
+        }
+        .useronclick {
+            width: 80vw;
+            height: 70vh;
+            background-color: rgb(24, 221, 211);
+            position: absolute;
+            left: 10vw;
+            top: 15vh;
+            display: none;
+            z-index: 3;
+            text-align: center;
+            font-family: 'Mukta', sans-serif;
+        }
+        .pagelock {
+            /*width:100vw;
+            height: 100vh;*/
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(109, 105, 105, 0.198);
+            z-index: 2;
+            display: none;
+        }
+        .close {
+            width: 35px;
+            position: absolute;
+            right: 3px;
+            top: 5px;
+        }
+        .close:hover {
+            cursor: pointer;
+        }
+        .font {
+            font-family: 'Mukta', sans-serif;
+        }
+        #welcome {
+            text-align: center;
+        }
+        #firsttime {
+            background: rgb(221, 221, 221);
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9;
+        }
+        .startbutton {
+            display: block;
+            border-radius: 8px;
+            background-color: #3faf30;
+            border: none;
+            color: #FFFFFF;
+            font-size: 1.3em;
+            text-align: center;
+            width: 100px;
+            height: 39px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px auto;
+          }
+          
+          .startbutton span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+            vertical-align: middle;
+          }
+          
+          .startbutton span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+          }
+          
+          .startbutton:hover span {
+            padding-right: 25px;
+          }
+          
+          .startbutton:hover span:after {
+            opacity: 1;
+            right: 0;
+          }
+          a:link {
+            color: mediumturquoise;
+            
+          }
+          a:visited {
+              color:mediumpurple;
+          }
+          a:hover {
+              background-color: rgba(204, 248, 187, 0.76);
+              transition: 0.5s;
+          }
+          
+    </style>
+</head>
+<body>
+    
+    <div id="header">
+        
+        <img id="user" src="/user.png">
+        <h1 class="font" id="welcome"></h1>
+        <div id="usersign">
+            <img id="usermsg" src="/user-msg.png">
+        </div>
+        <div id="useronclick" class="useronclick">
+            <h1>Client Information&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            <abbr title="Close"><img class="close" id="userclose" src="/close.png"></abbr>
+            <div id="clientinfotext">
+                <p id="ip">IP Add. : </p>
+                <p id="browser">UserAgent Info : </p>
+                <p id="loc">URL Info : </p>
+                <p id="lang">Language Code : </p>
+                <p id="appname">Application Name : </p>
+                <p id="engine">Browser Engine : </p>
+            </div>
+        </div>
+        <div id="pagelock" class="pagelock"></div>
+    </div>
+    <div id="firsttime" class="font">
+        <h1>EduCheck</h1>
+        <h3>You seem to be new. We need some basic info to use this service; Please fill in below.</h3>
+        <p style="color:mediumturquoise; cursor: pointer; text-decoration: underline;">I'm not new. I'm here to transfer data.</p>
+        <h4>Language</h4>
+        <form id="langform"><select name="lang" id="langcheck"><option value="x"></option><option value="ko">한국어</option><option value="en">English</option></select></form>
+        <br>
+        <h4>UserName<form id="formuser"><input id="firstname" name="user"></form></h4>
+        <h4>Age
+            <form>
+                  <select name="age" id="selectage">
+                    <option value="unselected">Your Age</option>
+                    <option value="5">5-6</option>
+                    <option value="6">6-7</option>
+                  </select>
+            </form>
+        </h4>
+        <form><input type="checkbox" id="termsagree" name="tos"><label for="agree">&nbsp;I agree to the <a href="https://www.privacypolicies.com/terms/view/ab18e81a7a1a46eac0241290312bce6c">Terms and Conditions</a> and the <a href="https://www.privacypolicies.com/privacy/view/f3795e86c8e00d25e60d8f4a94cae792">Privacy Policy</a></label><br><input type="checkbox" name="cp" id="cookieagree"><label for="cp"> I agree of EduCheck using <a href="https://www.privacypolicies.com/agreement/view/28850a75fd646ff98f343c99a1828b7e">Cookies</a> and acknowledged the <a href="https://www.privacypolicies.com/agreement/view/ebfd6aec6d6cba24b299a6c833a1320b">Disclaimer</a></label></form>
+        <div class="startbutton" style="vertical-align:middle" id="startbutton"><span>Start </span></div>
+    </div>
+    <!-- Main -->
+        <div id="number">
+            <img id="numberimg">
+        </div>
+    <!-- Main End -->
+    <div id="footer">
+        <!-- Thanks to Iconfinder!! -->
+        <img id="config" src="/config.png">
+        <div id="sign">
+            <img id="confighoverimg" src="/config-msg.png">
+        </div>
+        <div id="configclick" class="useronclick">
+            <h1>Configure Settings&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            <abbr title="Close"><img class="close" id="configclose" src="/close.png"></abbr>
+            <h3>UserName: <form id="userform"><input id="userinput" name="user"> <button id="userconfirm">Confirm</button></form></h3>
+            <h3>Age: 
+                <form id="ageselect">
+                    <select name="age" id="selec">
+                        <option value="unselected">Your Age</option>
+                        <option value="5">5-6</option>
+                        <option value="6">6-7</option>
+                    </select>
+                </form>
+            </h3>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script> <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script> <!-- js-cookie -->
+    <script> // JavaScript
+        // -User Start-
+        var user = document.getElementById('user');
+        var usermsg = document.getElementById('usermsg');
+        function userhover() {
+            usermsg.style.display = "block";
+        }
+        function userhoverout() {
+            usermsg.style.display = "none";
+        }
+        var config = document.getElementById('config');
+        var configmsg = document.getElementById('confighoverimg');
+        function confighover() {
+            configmsg.style.display = "block";
+            configmsg.style.position = "absolute";
+            configmsg.style.bottom = "20px";
+            configmsg.style.right = "64px";
+        }
+        function confighoverout() {
+            configmsg.style.display = "none";
+        }
+        config.addEventListener("mouseover", confighover);
+        config.addEventListener("mouseout", confighoverout);
+        user.addEventListener("mouseover", userhover);
+        user.addEventListener("mouseout", userhoverout);
+        var useropened = false;
+        var configopened = false;
+        var close = document.getElementById('userclose');
+        var close2 = document.getElementById('configclose');
+        function recheck() {
+            document.getElementById('pagelock').style.width = $(document).width() - 16 + "px";
+            document.getElementById('pagelock').style.height = window.innerHeight + "px";
+            recalc();
+        }
+        function recalc() {
+            setTimeout(recheck, 1);
+        }
+        user.onclick = function() {
+            if (useropened == false) {
+                document.getElementById('useronclick').style.display = "block";
+                document.getElementById('pagelock').style.display = "block";
+                useropened = true;
+                config.style.zIndex = "1";
+                recheck();
+                
+            }
+            else {
+                document.getElementById('useronclick').style.display = "none";
+                document.getElementById('pagelock').style.display = "none";
+                useropened = false;
+                config.style.zIndex = "3";
+            }
+        }
+        config.onclick = function() {
+            if (configopened == false) {
+                document.getElementById('configclick').style.display = "block";
+                document.getElementById('pagelock').style.display = "block";
+                configopened = true;
+                user.style.zIndex = "1";
+                recheck();
+            }
+            else {
+                document.getElementById('configclick').style.display = "none";
+                document.getElementById('pagelock').style.display = "none";
+                configopened = false;
+                user.style.zIndex = "3";
+            }
+        }
+        close.onclick = function() {
+            document.getElementById('useronclick').style.display = "none";
+            document.getElementById('pagelock').style.display = "none";
+            useropened = false;
+            config.style.zIndex = "1";   
+        }
+        close2.onclick = function() {
+            document.getElementById('configclick').style.display = "none";
+            document.getElementById('pagelock').style.display = "none";
+            configopened = false;
+            user.style.zIndex = "3";
+        }
+    </script>
+    <script> // Thanks to ip.pe.kr!!!
+        $.ajax({
+            url: "https://api.ip.pe.kr/"
+        }).done(function(data) {
+                $("#ip").html("IP Add. " + data);
+        });
+        document.getElementById('browser').textContent = "UserAgent Info : " + window.navigator.userAgent;
+        document.getElementById('loc').textContent = "URL Info : " + location.href;
+        document.getElementById('lang').textContent = "Language Code : " + window.navigator.language;
+        $("#appname").html("Application Name : " + window.navigator.appName);
+        $("#engine").html("Browser Engine : " + window.navigator.product);
+        document.getElementById('clientinfotext').style.width = "80vw";
+        document.getElementById('clientinfotext').style.height = "53vh";
+        document.getElementById('clientinfotext').style.overflow = "auto";
+    </script>
+    <script> // js-cookie
+        //textbox preset start
+        var placeholder;
+        if (Cookies.get('username') !== "undefined") {
+            placeholder = Cookies.get('username');
+        }
+        else {
+            placeholder = "Your Name Here!";
+        }
+        document.getElementById('userinput').style.placeholder = placeholder;
+        //textbox preset end
+        document.getElementById("userconfirm").onclick = function() {
+            var name = document.getElementById('userform').user.value;
+            document.getElementById('welcome').textContent = "Welcome back, " + name;
+            Cookies.set('username', name, {expires: 7300});
+            return false;
+        }
+    </script>
+    <script> // Welcome
+        var usrnme = Cookies.get('username');
+        document.getElementById('welcome').textContent = "Welcome back, " + usrnme;
+    </script>
+    <script>
+        document.getElementById('selec').onchange = function() {
+            var selected = document.getElementById('selec').value;
+            if (selected != "unselected") {
+                Cookies.set('age', selected, {expires: 7300});
+            }
+            return false;
+        }
+    </script>
+    <script>
+        if (Cookies.get('visitedbefore') == 'yes') {
+            Cookies.set('visitedbefore', 'yes', {expires: 7300});
+            document.getElementById('firsttime').style.display = "none";
+        }
+        else {
+            document.getElementById('firsttime').style.display = "block";
+        }
+        document.getElementById('startbutton').onclick = function() {
+            var formuserstr = document.getElementById('formuser').user.value.toString()
+
+            if (document.getElementById('termsagree').checked && document.getElementById('cookieagree').checked) {
+                if (document.getElementById('langcheck').value != 'x') {
+                    if (/\s/.test(document.getElementById('formuser').user.value)) {
+                        window.alert('Usernames cannot contain spaces, tabspaces, lines. And has to have more than 4 characters. Please recheck your UserName.')
+                    }
+                    else {
+                        if (document.getElementById('selectage').value != 'unselected') {
+                            Cookies.set('visitedbefore', 'yes', {expires: 7300});
+                            Cookies.set('username', document.getElementById('formuser').user.value, {expires: 7300});
+                            Cookies.set('age', document.getElementById('selectage').value, {expires: 7300});
+                            Cookies.set('lang', document.getElementById('langform').value, {expires: 7300});
+                            document.getElementById('firsttime').style.display = "none";
+                        }
+                        else {
+                            window.alert('Please select a valid age.')
+                        }
+                    }
+                }
+                else {
+                    window.alert('Please select a valid language.');
+                }
+            }
+            else {
+                window.alert('Please make sure you have checked all the checkboxes(agreements).');
+            }
+        }
+    </script>
+    <script>
+        var langimg = document.getElementById('numberimg');
+        function showimgperlang() {
+            if (Cookies.get('lang'))
+        }
+    </script>
+</body>
+</html>
